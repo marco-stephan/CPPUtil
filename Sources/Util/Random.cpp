@@ -1,4 +1,4 @@
-#include "Rand.h"
+#include "Random.h"
 
 #include <cstdlib>
 #include <time.h>

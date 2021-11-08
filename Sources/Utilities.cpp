@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Util/Rand.h"
+#include "Util/Random.h"
 
 void testRandomizer()
 {
