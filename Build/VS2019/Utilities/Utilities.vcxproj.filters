@@ -33,6 +33,12 @@
     <ClCompile Include="..\..\..\Sources\Util\Conversion\Boolean.cpp">
       <Filter>Source Files\Util\Conversion</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Util\Conversion\CString.cpp">
+      <Filter>Source Files\Util\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Util\CStringUtil.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\Util\Random.h">
@@ -40,6 +46,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sources\Util\Conversion\Boolean.h">
       <Filter>Header Files\Util\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\Util\Conversion\CString.h">
+      <Filter>Header Files\Util\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\Util\CStringUtil.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
