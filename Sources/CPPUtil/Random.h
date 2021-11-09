@@ -29,7 +29,7 @@ namespace CPPUtil
 		/// </summary>
 		/// <typeparam name="T">uint8_t</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_same<T, uint8_t>::value && ((RAND_MAX + 1) & 0xff) == 0, int> = 0>
+		template<typename T, std::enable_if_t<std::is_same<T, uint8_t>::value && (RAND_MAX & 0xff) == 0xff, int> = 0>
 		T Rand()
 		{
 			int randValue = std::rand();
@@ -42,7 +42,7 @@ namespace CPPUtil
 		/// </summary>
 		/// <typeparam name="T">uint8_t</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_same<T, uint8_t>::value && ((RAND_MAX + 1) & 0xff) != 0, int> = 0>
+		template<typename T, std::enable_if_t<std::is_same<T, uint8_t>::value && (RAND_MAX & 0xff) != 0xff, int> = 0>
 		T Rand()
 		{
 			// Build an uint8_t bit by bit
