@@ -51,5 +51,8 @@
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Math\Trigonometry_Test.cpp">
       <Filter>Source Files\Tests\CPPUtil\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\String_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

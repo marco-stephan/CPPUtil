@@ -62,19 +62,19 @@ namespace CPPUtil
 		char* Strcpy(const char* str, size_t length);
 
 		/// <summary>
-		/// Find the position of the first occurrence of a substring in a string.
+		/// Find the position of the first occurrence of a substring in a C string.
 		/// </summary>
-		/// <param name="string">The string to search in</param>
+		/// <param name="string">The C string to search in</param>
 		/// <param name="substring">The substring to search for.</param>
 		/// <param name="index">The starting position of the substring. Only set if substring was found. May be NULL</param>
 		/// <returns>True if the substring was found; False otherwise</returns>
 		bool Strpos(const char* string, const char* substring, size_t* index);
 
 		/// <summary>
-		/// Calculates the Levenshtein distance between the given strings
+		/// Calculates the Levenshtein distance between the given C strings
 		/// </summary>
-		/// <param name="str1">First string</param>
-		/// <param name="str2">Second string</param>
+		/// <param name="str1">First C string</param>
+		/// <param name="str2">Second C string</param>
 		/// <param name="caseSensitive">True if lower and upper case are to be differentiated; False otherwise</param>
 		/// <returns>Levenshtein distance between both strings.</returns>
 		size_t Levenshtein(const char* str1, const char* str2, bool caseSensitive = true);

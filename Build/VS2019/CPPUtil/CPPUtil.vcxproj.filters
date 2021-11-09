@@ -48,6 +48,9 @@
     <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\String.cpp">
       <Filter>Source Files\CPPUtil\Conversion</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sources\CPPUtil\String.cpp">
+      <Filter>Source Files\CPPUtil</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\CPPUtil\CString.h">
@@ -79,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\String.h">
       <Filter>Header Files\CPPUtil\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\String.h">
+      <Filter>Header Files\CPPUtil</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
