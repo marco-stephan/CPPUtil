@@ -68,5 +68,8 @@
     <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Basics.h">
       <Filter>Header Files\CPPUtil\Math</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Constants.h">
+      <Filter>Header Files\CPPUtil\Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
