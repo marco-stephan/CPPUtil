@@ -46,16 +46,16 @@ std::string CPPUtil::String::Trim(const std::string str)
 	return TrimLeft(TrimRight(str));
 }
 
-std::vector<std::string> CPPUtil::String::Split(const std::string string, const char* delimiterCharaters, bool combineSuccessiveDelimiters)
+std::vector<std::string> CPPUtil::String::Split(const std::string string, const char* delimiterCharacters, bool combineSuccessiveDelimiters)
 {
 	std::vector<std::string> result;
 
 	// Split the string
 	size_t stringIndex = 0;
 
-	do
+	while (true)
 	{
-		size_t delimiterIndex = string.find_first_of(delimiterCharaters, stringIndex);
+		size_t delimiterIndex = string.find_first_of(delimiterCharacters, stringIndex);
 
 		// Check if end has been reached
 		if (delimiterIndex == std::string::npos)
@@ -68,7 +68,7 @@ std::vector<std::string> CPPUtil::String::Split(const std::string string, const 
 
 		if (combineSuccessiveDelimiters)
 		{
-			stringIndex = string.find_first_not_of(delimiterCharaters, delimiterIndex);
+			stringIndex = string.find_first_not_of(delimiterCharacters, delimiterIndex);
 
 			// Check if there are any characters left
 			if (stringIndex == std::string::npos)
@@ -83,9 +83,15 @@ std::vector<std::string> CPPUtil::String::Split(const std::string string, const 
 			stringIndex = delimiterIndex + 1;
 		}
 	}
-	while (true);
 
 	return result;
+}
+
+std::vector<std::string> CPPUtil::String::Split(const std::string string, const char delimiterCharacter, bool combineSuccessiveDelimiters)
+{
+	const char delimiterCharacters[2]{delimiterCharacter, '\0'};
+
+	return Split(string, delimiterCharacters, combineSuccessiveDelimiters);
 }
 
 bool CPPUtil::String::IsFloatingPoint(const std::string str)

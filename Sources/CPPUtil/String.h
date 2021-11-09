@@ -75,10 +75,19 @@ namespace CPPUtil
 		/// Splits a C++ string according to the delimiter characters
 		/// </summary>
 		/// <param name="string">C++ string to split</param>
-		/// <param name="delimiterCharaters">String containing all delimiter characters</param>
+		/// <param name="delimiterCharacters">String containing all delimiter characters</param>
 		/// <param name="combineSuccessiveDelimiters">True to treat successive delimiter characters as one character; False otherwise</param>
 		/// <returns>Vector containg all the split C++ strings</returns>
-		std::vector<std::string> Split(const std::string string, const char* delimiterCharaters, bool combineSuccessiveDelimiters);
+		std::vector<std::string> Split(const std::string string, const char* delimiterCharacters, bool combineSuccessiveDelimiters);
+
+		/// <summary>
+		/// Splits a C++ string according to the delimiter characters
+		/// </summary>
+		/// <param name="string">C++ string to split</param>
+		/// <param name="delimiterCharacter">Delimiter character</param>
+		/// <param name="combineSuccessiveDelimiters">True to treat successive delimiter characters as one character; False otherwise</param>
+		/// <returns>Vector containg all the split C++ strings</returns>
+		std::vector<std::string> Split(const std::string string, const char delimiterCharacter, bool combineSuccessiveDelimiters);
 
 		/// <summary>
 		/// Checks if the given C++ string is an integer.

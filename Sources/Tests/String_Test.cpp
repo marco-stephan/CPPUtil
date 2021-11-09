@@ -57,16 +57,16 @@ namespace CPPUtil_Test
 	{
 		std::vector<std::string> splitString;
 
-		splitString = CPPUtil::String::Split("", " ", false);
+		splitString = CPPUtil::String::Split("", ' ', false);
 		ASSERT_EQ(splitString.size(), 1);
 		ASSERT_EQ(splitString[0], "");
 
-		splitString = CPPUtil::String::Split(" ", " ", false);
+		splitString = CPPUtil::String::Split(" ", ' ', false);
 		ASSERT_EQ(splitString.size(), 2);
 		ASSERT_EQ(splitString[0], "");
 		ASSERT_EQ(splitString[1], "");
 
-		splitString = CPPUtil::String::Split("  T  ", " ", false);
+		splitString = CPPUtil::String::Split("  T  ", ' ', false);
 		ASSERT_EQ(splitString.size(), 5);
 		ASSERT_EQ(splitString[0], "");
 		ASSERT_EQ(splitString[1], "");
@@ -74,14 +74,14 @@ namespace CPPUtil_Test
 		ASSERT_EQ(splitString[3], "");
 		ASSERT_EQ(splitString[4], "");
 
-		splitString = CPPUtil::String::Split("Test1 Test2 Test3 ", " ", false);
+		splitString = CPPUtil::String::Split("Test1 Test2 Test3 ", ' ', false);
 		ASSERT_EQ(splitString.size(), 4);
 		ASSERT_EQ(splitString[0], "Test1");
 		ASSERT_EQ(splitString[1], "Test2");
 		ASSERT_EQ(splitString[2], "Test3");
 		ASSERT_EQ(splitString[3], "");
 
-		splitString = CPPUtil::String::Split("Test1     Test2  Test3  ", " ", false);
+		splitString = CPPUtil::String::Split("Test1     Test2  Test3  ", ' ', false);
 		ASSERT_EQ(splitString.size(), 10);
 		ASSERT_EQ(splitString[0], "Test1");
 		ASSERT_EQ(splitString[1], "");
@@ -110,29 +110,29 @@ namespace CPPUtil_Test
 		ASSERT_EQ(splitString[11], "");
 		ASSERT_EQ(splitString[12], "");
 
-		splitString = CPPUtil::String::Split("", " ", true);
+		splitString = CPPUtil::String::Split("", ' ', true);
 		ASSERT_EQ(splitString.size(), 1);
 		ASSERT_EQ(splitString[0], "");
 
-		splitString = CPPUtil::String::Split(" ", " ", true);
+		splitString = CPPUtil::String::Split(" ", ' ', true);
 		ASSERT_EQ(splitString.size(), 2);
 		ASSERT_EQ(splitString[0], "");
 		ASSERT_EQ(splitString[1], "");
 
-		splitString = CPPUtil::String::Split("  T  ", " ", true);
+		splitString = CPPUtil::String::Split("  T  ", ' ', true);
 		ASSERT_EQ(splitString.size(), 3);
 		ASSERT_EQ(splitString[0], "");
 		ASSERT_EQ(splitString[1], "T");
 		ASSERT_EQ(splitString[2], "");
 
-		splitString = CPPUtil::String::Split("Test1 Test2 Test3 ", " ", true);
+		splitString = CPPUtil::String::Split("Test1 Test2 Test3 ", ' ', true);
 		ASSERT_EQ(splitString.size(), 4);
 		ASSERT_EQ(splitString[0], "Test1");
 		ASSERT_EQ(splitString[1], "Test2");
 		ASSERT_EQ(splitString[2], "Test3");
 		ASSERT_EQ(splitString[3], "");
 
-		splitString = CPPUtil::String::Split("Test1     Test2  Test3  ", " ", true);
+		splitString = CPPUtil::String::Split("Test1     Test2  Test3  ", ' ', true);
 		ASSERT_EQ(splitString.size(), 4);
 		ASSERT_EQ(splitString[0], "Test1");
 		ASSERT_EQ(splitString[1], "Test2");
