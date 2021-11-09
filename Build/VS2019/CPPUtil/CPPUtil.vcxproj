@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\Boolean.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\CString.cpp" />
+    <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\String.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\CString.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\IStream.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\Random.cpp" />
@@ -29,6 +30,7 @@
     <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\Boolean.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\CString.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\Integer.h" />
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\String.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\CString.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\IStream.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Basics.h" />

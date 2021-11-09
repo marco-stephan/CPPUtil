@@ -58,7 +58,7 @@ namespace CPPUtil_Test
 		{
 			for (size_t i = 0; i < INT_STRING_PAIRS.size(); i++)
 			{
-				const int intValue = std::get<0>(INT_STRING_PAIRS[i]);
+				const int& intValue = std::get<0>(INT_STRING_PAIRS[i]);
 				const char* stringValue = std::get<1>(INT_STRING_PAIRS[i]);
 
 				ASSERT_EQ(CPPUtil::Conversion::CString::ToInteger<int>(stringValue), intValue) << "Index: " << i;
@@ -69,7 +69,7 @@ namespace CPPUtil_Test
 		{
 			for (size_t i = 0; i < UNSIGNED_INT_STRING_PAIRS.size(); i++)
 			{
-				const unsigned int unsignedIntValue = std::get<0>(UNSIGNED_INT_STRING_PAIRS[i]);
+				const unsigned int& unsignedIntValue = std::get<0>(UNSIGNED_INT_STRING_PAIRS[i]);
 				const char* stringValue = std::get<1>(UNSIGNED_INT_STRING_PAIRS[i]);
 
 				ASSERT_EQ(CPPUtil::Conversion::CString::ToInteger<unsigned int>(stringValue), unsignedIntValue) << "Index: " << i;
@@ -80,7 +80,7 @@ namespace CPPUtil_Test
 		{
 			for (size_t i = 0; i < FLOAT_STRING_PAIRS.size(); i++)
 			{
-				const float floatValue = std::get<0>(FLOAT_STRING_PAIRS[i]);
+				const float& floatValue = std::get<0>(FLOAT_STRING_PAIRS[i]);
 				const char* stringValue = std::get<1>(FLOAT_STRING_PAIRS[i]);
 
 				ASSERT_FLOAT_EQ(CPPUtil::Conversion::CString::ToFloat(stringValue), floatValue) << "Index: " << i;
@@ -91,7 +91,7 @@ namespace CPPUtil_Test
 		{
 			for (size_t i = 0; i < DOUBLE_STRING_PAIRS.size(); i++)
 			{
-				const double doubleValue = std::get<0>(DOUBLE_STRING_PAIRS[i]);
+				const double& doubleValue = std::get<0>(DOUBLE_STRING_PAIRS[i]);
 				const char* stringValue = std::get<1>(DOUBLE_STRING_PAIRS[i]);
 
 				ASSERT_DOUBLE_EQ(CPPUtil::Conversion::CString::ToDouble(stringValue), doubleValue) << "Index: " << i;
