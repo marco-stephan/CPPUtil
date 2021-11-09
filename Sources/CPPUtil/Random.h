@@ -10,6 +10,7 @@ namespace CPPUtil
 {
 	/// <summary>
 	/// A namespace containing randomization utilities.
+	/// Internally, the std::rand functionality is used
 	/// </summary>
 	namespace Random
 	{
@@ -25,34 +26,36 @@ namespace CPPUtil
 		void Init();
 
 		/// <summary>
-		/// Generates a random value within the range [0, 255].
+		/// Generates a random value within the minimum and maximum value of an integer.
 		/// </summary>
-		/// <typeparam name="T">uint8_t</typeparam>
+		/// <typeparam name="T">Any integral type</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_same<T, uint8_t>::value && (RAND_MAX & 0xff) == 0xff, int> = 0>
+		template<typename T, std::enable_if_t<std::is_integral_v<T> && !std::is_same_v<T, bool>, int> = 0>
 		T Rand()
 		{
-			int randValue = std::rand();
+			// Determine how many std::rand calls are necessary to fill all bits of the value randomly
+			uint8_t bitsRandMax = 0;
+			int bitsmaskRandMax = 0;
 
-			return static_cast<uint8_t>(randValue & 0xff);
-		}
-
-		/// <summary>
-		/// Generates a random value within the range [0, 255].
-		/// </summary>
-		/// <typeparam name="T">uint8_t</typeparam>
-		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_same<T, uint8_t>::value && (RAND_MAX & 0xff) != 0xff, int> = 0>
-		T Rand()
-		{
-			// Build an uint8_t bit by bit
-			uint8_t result = 0;
-
-			for (int i = 0; i < 8; i++)
+			for (uint8_t i = 0; i <= sizeof(int) * CHAR_BIT; i++)
 			{
-				int randValue = static_cast<uint8_t>(Rand<bool>());
+				if (!(RAND_MAX & (1 << i)))
+				{
+					break;
+				}
 
-				result |= randValue << i;
+				bitsmaskRandMax |= (1 << i);
+				bitsRandMax++;
+			}
+
+			// Fill result
+			T result = 0;
+
+			for (uint8_t bitsFilled = 0; bitsFilled < sizeof(T) * CHAR_BIT; bitsFilled += bitsRandMax)
+			{
+				const int randValue = (std::rand() & bitsmaskRandMax);
+
+				result |= (randValue << bitsFilled);
 			}
 
 			return result;
@@ -63,7 +66,7 @@ namespace CPPUtil
 		/// </summary>
 		/// <typeparam name="T">bool</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_same<T, bool>::value, int> = 0>
+		template<typename T, std::enable_if_t<std::is_same_v<T, bool>, int> = 0>
 		T Rand()
 		{
 			return std::rand() & 1;
@@ -74,31 +77,12 @@ namespace CPPUtil
 		/// </summary>
 		/// <typeparam name="T">Type of the random value to generate</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_floating_point<T>::value, int> = 0>
+		template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
 		T Rand()
 		{
-			unsigned long long randValue = Rand<unsigned long long>();
+			uintmax_t randValue = Rand<uintmax_t>();
 
-			return static_cast<T>(randValue) / static_cast<T>(std::numeric_limits<unsigned long long>::max());
-		}
-
-		/// <summary>
-		/// Generates a random value between the minimal and maximal value.
-		/// </summary>
-		/// <typeparam name="T">Type of the random value to generate</typeparam>
-		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<!std::is_same<T, uint8_t>::value && !std::is_same<T, bool>::value && !std::is_floating_point<T>::value, int> = 0>
-		T Rand()
-		{
-			T result = 0;
-
-			// Build result byte by byte
-			for (size_t i = 0; i < sizeof(T); i++)
-			{
-				result |= (static_cast<T>(Rand<uint8_t>()) << i * 8);
-			}
-
-			return result;
+			return static_cast<T>(randValue) / static_cast<T>(std::numeric_limits<uintmax_t>::max());
 		}
 	}
 }
