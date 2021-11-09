@@ -21,13 +21,17 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Sources\Util\Conversion\Boolean.cpp" />
     <ClCompile Include="..\..\..\Sources\Util\Conversion\CString.cpp" />
-    <ClCompile Include="..\..\..\Sources\Util\CStringUtil.cpp" />
+    <ClCompile Include="..\..\..\Sources\Util\CString.cpp" />
+    <ClCompile Include="..\..\..\Sources\Util\IStream.cpp" />
     <ClCompile Include="..\..\..\Sources\Util\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Sources\Util\Conversion\Boolean.h" />
     <ClInclude Include="..\..\..\Sources\Util\Conversion\CString.h" />
-    <ClInclude Include="..\..\..\Sources\Util\CStringUtil.h" />
+    <ClInclude Include="..\..\..\Sources\Util\Conversion\Integer.h" />
+    <ClInclude Include="..\..\..\Sources\Util\CString.h" />
+    <ClInclude Include="..\..\..\Sources\Util\IStream.h" />
+    <ClInclude Include="..\..\..\Sources\Util\Math\Basics.h" />
     <ClInclude Include="..\..\..\Sources\Util\Random.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -112,6 +116,8 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(Directory)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -131,6 +137,8 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(Directory)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -150,6 +158,8 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(Directory)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -169,6 +179,8 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>$(SolutionDir)..\..\Sources;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ObjectFileName>$(IntDir)%(Directory)</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>

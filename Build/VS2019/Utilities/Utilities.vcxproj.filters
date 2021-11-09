@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Util\Conversion">
       <UniqueIdentifier>{4b61bf07-3c1f-4122-bece-5d69a552f8b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util\Math">
+      <UniqueIdentifier>{d4c4c854-fd63-4032-91b4-d44acc7b627d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sources\Util\Random.cpp">
@@ -36,7 +39,10 @@
     <ClCompile Include="..\..\..\Sources\Util\Conversion\CString.cpp">
       <Filter>Source Files\Util\Conversion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sources\Util\CStringUtil.cpp">
+    <ClCompile Include="..\..\..\Sources\Util\CString.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Util\IStream.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,8 +56,17 @@
     <ClInclude Include="..\..\..\Sources\Util\Conversion\CString.h">
       <Filter>Header Files\Util\Conversion</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Sources\Util\CStringUtil.h">
+    <ClInclude Include="..\..\..\Sources\Util\CString.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\Util\IStream.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\Util\Conversion\Integer.h">
+      <Filter>Header Files\Util\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\Util\Math\Basics.h">
+      <Filter>Header Files\Util\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

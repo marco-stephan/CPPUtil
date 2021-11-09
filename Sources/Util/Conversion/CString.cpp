@@ -5,7 +5,8 @@
 #include "Util/CString.h"
 
 #if defined(_WIN32)
-#include <stringapiset.h>
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 #endif // defined(_WIN32)
 
 float Util::Conversion::CString::ToFloat(const char* str)

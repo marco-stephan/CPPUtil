@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Tests\Util\Conversion">
       <UniqueIdentifier>{0ea2373c-62a6-48c9-9d49-cc82f196dc5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Tests\Util\Math">
+      <UniqueIdentifier>{3c6f7fd4-cf17-46b4-ba7a-3615624547bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Sources\Tests\Util\Random_Test.cpp">
@@ -29,6 +32,18 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Sources\Tests\Util\Conversion\Boolean_Test.cpp">
       <Filter>Source Files\Tests\Util\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\Util\Conversion\CString_Test.cpp">
+      <Filter>Source Files\Tests\Util\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\Util\CString_Test.cpp">
+      <Filter>Source Files\Tests\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\Util\Conversion\Integer_Test.cpp">
+      <Filter>Source Files\Tests\Util\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\Util\Math\Basics_Test.cpp">
+      <Filter>Source Files\Tests\Util\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

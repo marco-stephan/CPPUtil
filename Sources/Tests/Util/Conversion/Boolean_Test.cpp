@@ -6,7 +6,7 @@ namespace Util_Tests
 {
 	namespace Conversion_Tests
 	{
-		class Boolean_Test : public ::testing::Test
+		class Conversion_Boolean_Test : public ::testing::Test
 		{
 		public:
 
@@ -19,13 +19,13 @@ namespace Util_Tests
 			}
 		};
 
-		TEST_F(Boolean_Test, ToCString)
+		TEST_F(Conversion_Boolean_Test, ToCString)
 		{
 			ASSERT_STREQ(Util::Conversion::Boolean::ToCString(true), "true");
 			ASSERT_STREQ(Util::Conversion::Boolean::ToCString(false), "false");
 		}
 
-		TEST_F(Boolean_Test, ToInt)
+		TEST_F(Conversion_Boolean_Test, ToInt)
 		{
 			ASSERT_EQ(Util::Conversion::Boolean::ToInt(true), 1);
 			ASSERT_EQ(Util::Conversion::Boolean::ToInt(false), 0);

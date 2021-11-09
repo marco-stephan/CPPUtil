@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <type_traits>
 #include "Util/Conversion/Boolean.h"
 
 namespace Util
@@ -29,7 +30,7 @@ namespace Util
 
 				bool positive = true;
 
-				// Account for a possible "+" sign
+				// Account for a possible sign
 				if (str[0] == '+' || str[0] == '-')
 				{
 					if constexpr (std::is_signed_v<TargetType>)

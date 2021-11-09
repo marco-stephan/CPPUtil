@@ -1,4 +1,4 @@
-#include "CStringUtil.h"
+#include "CString.h"
 
 #include <algorithm>
 #include <cstring>
@@ -8,7 +8,7 @@
 #include <queue>
 #include <sstream>
 #include <string>
-#include "Utilities/IStreamUtil.h"
+#include "IStream.h"
 
 int Util::CString::Strcmp(const char* str1, const char* str2, bool caseSensitive)
 {
@@ -90,6 +90,94 @@ char* Util::CString::Strcpy(const char* str, size_t length)
 	return result;
 }
 
+bool Util::CString::Strpos(const char* string, const char* substring, size_t* index)
+{
+	size_t stringLength = Strlen(string);
+	size_t substringLength = Strlen(substring);
+
+	if (substringLength <= stringLength)
+	{
+		for (size_t stringIndex = 0; stringIndex <= stringLength - substringLength; stringIndex++)
+		{
+			size_t substringIndex = 0;
+
+			// Compare both strings
+			while (substringIndex < substringLength && string[stringIndex + substringIndex] == substring[substringIndex])
+			{
+				substringIndex++;
+			}
+
+			// Check if the substring was found as a whole
+			if (substringIndex == substringLength)
+			{
+				if (index)
+				{
+					*index = stringIndex;
+				}
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+size_t Util::CString::Levenshtein(const char* str1, const char* str2, bool caseSensitive)
+{
+	size_t str1Length = Strlen(str1);
+	size_t str2Length = Strlen(str2);
+
+	if (str1Length > str2Length)
+	{
+		return Levenshtein(str2, str1, caseSensitive);
+	}
+
+	size_t* levDistArray = new size_t[str1Length + 1];
+
+	for (size_t str1Index = 0; str1Index <= str1Length; str1Index++)
+	{
+		levDistArray[str1Index] = str1Index;
+	}
+
+	for (size_t str2Index = 0; str2Index < str2Length; str2Index++)
+	{
+		size_t prevDiagonal = levDistArray[0];
+
+		levDistArray[0]++;
+
+		for (size_t str1Index = 0; str1Index < str1Length; str1Index++)
+		{
+			size_t prevDiagonalSave = levDistArray[str1Index + 1];
+			char str1Char = str1[str1Index];
+			char str2Char = str2[str2Index];
+
+			if (!caseSensitive)
+			{
+				str1Char = static_cast<char>(tolower(str1Char));
+				str2Char = static_cast<char>(tolower(str2Char));
+			}
+
+			if (str1Char == str2Char)
+			{
+				levDistArray[str1Index + 1] = prevDiagonal;
+			}
+			else
+			{
+				levDistArray[str1Index + 1] = std::min(std::min(levDistArray[str1Index], levDistArray[str1Index + 1]), prevDiagonal) + 1;
+			}
+
+			prevDiagonal = prevDiagonalSave;
+		}
+	}
+
+	size_t levDist = levDistArray[str1Length];
+
+	delete[] levDistArray;
+
+	return levDist;
+}
+
 char* Util::CString::ReadFile(const char* filePath)
 {
 	// Open file
@@ -108,7 +196,7 @@ char* Util::CString::ReadFile(const char* filePath)
 	// Read line by line
 	std::string line;
 
-	while (IStreamUtil::GetLine(file, line, true))
+	while (IStream::GetLine(file, line, true))
 	{
 		if (!firstLine)
 		{
@@ -154,40 +242,11 @@ char* Util::CString::TimeStamp(const char* timeStampFormat)
 	return Strcpy(timeStampStringStream.str().c_str());
 }
 
-bool Util::CString::IsUnsignedInteger(const char* str)
-{
-	return IsSignedInteger(str) && str[0] != '-';
-}
-
-bool Util::CString::IsSignedInteger(const char* str)
-{
-	size_t strLength = Strlen(str);
-
-	// Check for an empty string
-	if (strLength == 0)
-	{
-		return false;
-	}
-
-	for (size_t i = 0; i < strLength; i++)
-	{
-		if (str[i] < '0' || str[i] > '9')
-		{
-			// Allow "+" or "-" as the first sign
-			if (i != 0 || (str[i] != '+' && str[i] != '-'))
-			{
-				return false;
-			}
-		}
-	}
-
-	return true;
-}
-
 bool Util::CString::IsFloatingPoint(const char* str)
 {
 	size_t strLength = Strlen(str);
 	bool decimalSeparatorFound = false;
+	bool digitsFound = false;
 
 	// Check for an empty C string
 	if (strLength == 0)
@@ -216,7 +275,12 @@ bool Util::CString::IsFloatingPoint(const char* str)
 				return false;
 			}
 		}
+		else
+		{
+			digitsFound = true;
+		}
 	}
 
-	return true;
+	// There must be digits for a valid floating point
+	return digitsFound;
 }
