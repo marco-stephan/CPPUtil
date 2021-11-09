@@ -33,6 +33,7 @@
     <ClInclude Include="..\..\..\Sources\CPPUtil\IStream.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Basics.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Constants.h" />
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Trigonometry.h" />
     <ClInclude Include="..\..\..\Sources\CPPUtil\Random.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
