@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{77f715aa-1a85-485e-83af-3389f92f9ba4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{b2468781-6303-4fac-b04d-9d1f104684bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{398b0cdc-9ddd-4511-84cc-6949d74107fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{4c02f536-b69e-4f0d-b163-9e29ed204d64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\CPPUtil">
+      <UniqueIdentifier>{3623f323-f5c1-47f3-81fb-657e50b35898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\CPPUtil\Conversion">
+      <UniqueIdentifier>{0ea2373c-62a6-48c9-9d49-cc82f196dc5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests\CPPUtil\Math">
+      <UniqueIdentifier>{3c6f7fd4-cf17-46b4-ba7a-3615624547bb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\CString_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Random_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Conversion\Boolean_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Conversion\CString_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Conversion\Integer_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Math\Basics_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil\Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

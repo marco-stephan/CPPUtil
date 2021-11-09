@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\CPPUtil">
+      <UniqueIdentifier>{84d260a5-5f33-4ddf-803d-21b72a6bc556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CPPUtil\Conversion">
+      <UniqueIdentifier>{4b61bf07-3c1f-4122-bece-5d69a552f8b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPPUtil">
+      <UniqueIdentifier>{27de4c4e-0cde-4d7c-8ffb-a57588bb56e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPPUtil\Conversion">
+      <UniqueIdentifier>{ecc27e37-2ddd-4074-ab78-04e3580d411f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\CPPUtil\Math">
+      <UniqueIdentifier>{d4c4c854-fd63-4032-91b4-d44acc7b627d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Sources\CPPUtil\CString.cpp">
+      <Filter>Source Files\CPPUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\CPPUtil\IStream.cpp">
+      <Filter>Source Files\CPPUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\CPPUtil\Random.cpp">
+      <Filter>Source Files\CPPUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\Boolean.cpp">
+      <Filter>Source Files\CPPUtil\Conversion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\CString.cpp">
+      <Filter>Source Files\CPPUtil\Conversion</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\CString.h">
+      <Filter>Header Files\CPPUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\IStream.h">
+      <Filter>Header Files\CPPUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Random.h">
+      <Filter>Header Files\CPPUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\Boolean.h">
+      <Filter>Header Files\CPPUtil\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\CString.h">
+      <Filter>Header Files\CPPUtil\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Conversion\Integer.h">
+      <Filter>Header Files\CPPUtil\Conversion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Sources\CPPUtil\Math\Basics.h">
+      <Filter>Header Files\CPPUtil\Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
