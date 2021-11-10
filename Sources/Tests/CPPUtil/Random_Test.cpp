@@ -15,7 +15,7 @@ namespace CPPUtil_Test
 		// Max deviation between expectancy value and each element of the distribution
 		constexpr static const double DISTRIBUTION_MAX_DEVIATION = 0.025;
 
-		// Amount of intervals to split [0; 1] into for the distribution check
+		// Amount of intervals to split [0; 1) into for the distribution check
 		constexpr static const size_t DISTRIBUTION_FLOATING_INTERVALS = 64;
 
 	protected:
@@ -37,7 +37,6 @@ namespace CPPUtil_Test
 				Type randomValue = CPPUtil::Random::Rand<Type>();
 
 				// Place in correct interval
-				// Note that 1 is ommitted from this so all intervals are equally sized
 				for (size_t i = 0; i < DISTRIBUTION_FLOATING_INTERVALS; i++)
 				{
 					if (randomValue < static_cast<Type>(static_cast<double>(i + 1) * (1.0 / static_cast<double>(DISTRIBUTION_FLOATING_INTERVALS))))
@@ -145,5 +144,10 @@ namespace CPPUtil_Test
 	TEST_F(Random_Test, Float)
 	{
 		testEvenDistribution<float>();
+	}
+
+	TEST_F(Random_Test, Double)
+	{
+		testEvenDistribution<double>();
 	}
 }

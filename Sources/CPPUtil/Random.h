@@ -1,9 +1,8 @@
 #pragma once
 
-#include <cstdlib>
+#include <cstdint>
 #include <limits>
-#include <stdint.h>
-#include <time.h>
+#include <random>
 #include <type_traits>
 
 namespace CPPUtil
@@ -14,6 +13,8 @@ namespace CPPUtil
 	/// </summary>
 	namespace Random
 	{
+		extern std::default_random_engine randomEngine;
+
 		/// <summary>
 		/// Initializes the randomization utilities.
 		/// </summary>
@@ -33,32 +34,20 @@ namespace CPPUtil
 		template<typename T, std::enable_if_t<std::is_integral_v<T> && !std::is_same_v<T, bool>, int> = 0>
 		T Rand()
 		{
-			// Determine how many std::rand calls are necessary to fill all bits of the value randomly
-			uint8_t bitsRandMax = 0;
-			int bitsmaskRandMax = 0;
-
-			for (uint8_t i = 0; i <= sizeof(int) * CHAR_BIT; i++)
+			if constexpr (sizeof(T) < 2)
 			{
-				if (!(RAND_MAX & (1 << i)))
-				{
-					break;
-				}
+				// For some reason MSVC does not support a uniform_int_distribution<T> where sizeof(T) < 2
+				// Therefore, we just generate one for int16_t and then cast it down
+				std::uniform_int_distribution<int16_t> randomDistribution(static_cast<int16_t>(std::numeric_limits<T>::min()), static_cast<int16_t>(std::numeric_limits<T>::max()));
 
-				bitsmaskRandMax |= (1 << i);
-				bitsRandMax++;
+				return static_cast<T>(randomDistribution(randomEngine));
 			}
-
-			// Fill result
-			T result = 0;
-
-			for (uint8_t bitsFilled = 0; bitsFilled < sizeof(T) * CHAR_BIT; bitsFilled += bitsRandMax)
+			else
 			{
-				const int randValue = (std::rand() & bitsmaskRandMax);
+				std::uniform_int_distribution<T> randomDistribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
 
-				result |= (randValue << bitsFilled);
+				return randomDistribution(randomEngine);
 			}
-
-			return result;
 		}
 
 		/// <summary>
@@ -69,20 +58,22 @@ namespace CPPUtil
 		template<typename T, std::enable_if_t<std::is_same_v<T, bool>, int> = 0>
 		T Rand()
 		{
-			return std::rand() & 1;
+			std::uniform_int_distribution<uint16_t> randomDistribution(0, 1);
+
+			return static_cast<bool>(randomDistribution(randomEngine));
 		}
 
 		/// <summary>
-		/// Generates a random floating point value within the range [0, 1].
+		/// Generates a random floating point value within the range [0, 1).
 		/// </summary>
 		/// <typeparam name="T">Type of the random value to generate</typeparam>
 		/// <returns>The random value.</returns>
 		template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
 		T Rand()
 		{
-			uintmax_t randValue = Rand<uintmax_t>();
+			std::uniform_real_distribution<T> randomDistribution(static_cast<T>(0.0), static_cast<T>(1.0));
 
-			return static_cast<T>(randValue) / static_cast<T>(std::numeric_limits<uintmax_t>::max());
+			return randomDistribution(randomEngine);
 		}
 	}
 }

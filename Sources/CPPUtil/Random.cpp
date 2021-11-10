@@ -1,14 +1,15 @@
 #include "Random.h"
 
-#include <cstdlib>
-#include <time.h>
+std::default_random_engine CPPUtil::Random::randomEngine;
 
 void CPPUtil::Random::Init(unsigned int seed)
 {
-	std::srand(seed);
+	randomEngine.seed(seed);
 }
 
 void CPPUtil::Random::Init()
 {
-	Init(static_cast<unsigned int>(time(NULL)));
+	std::random_device rd;
+
+	randomEngine.seed(rd());
 }
