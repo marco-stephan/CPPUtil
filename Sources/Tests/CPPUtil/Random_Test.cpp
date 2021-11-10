@@ -134,6 +134,42 @@ namespace CPPUtil_Test
 		}
 
 		/// <summary>
+		/// Checks whether the CPPUtil::Random::EventOccurs<Type>() function returns a distribution corresponding to the probability
+		/// </summary>
+		/// <typeparam name="Type">Type of the probability</typeparam>
+		/// <param name="probability">Probability</param>
+		template<typename Type>
+		void testEventDistribution(const Type& probability)
+		{
+			// Build intervals vector
+			std::vector<Type> intervals;
+
+			intervals.push_back(static_cast<Type>(1) - probability);
+			intervals.push_back(probability);
+
+			std::vector<size_t> randomResults;
+
+			// Prepare random result vector
+			for (auto interval : intervals)
+			{
+				randomResults.push_back(0);
+			}
+
+			// Generate random values and check if evenly distributed
+			while (true)
+			{
+				bool eventOccurs = CPPUtil::Random::EventOccurs<Type>(probability);
+
+				randomResults[static_cast<bool>(eventOccurs)]++;
+
+				if (randomResultsCardinalityDistributed(randomResults, intervals))
+				{
+					break;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Checks whether the provided random value vector is semi-evenly distributed
 		/// </summary>
 		/// <param name="randomResults">Random value vector. Contains the number of times each "element" has been hit</param>
@@ -351,5 +387,23 @@ namespace CPPUtil_Test
 		testIntervalDistribution<double>({1.0, 0.0, 9.0, 40.0, 0.0, 240.0, 123.0, 37.0, 91.0, 2.0});
 		testIntervalDistribution<double>({1.0});
 		testIntervalDistribution<double>({0.2, 0.8});
+	}
+
+	TEST_F(Random_Test, EventOccursFloat)
+	{
+		testEventDistribution<float>(0.0f);
+		testEventDistribution<float>(0.25f);
+		testEventDistribution<float>(0.5f);
+		testEventDistribution<float>(0.75f);
+		testEventDistribution<float>(1.0f);
+	}
+
+	TEST_F(Random_Test, EventOccursDouble)
+	{
+		testEventDistribution<double>(0.0);
+		testEventDistribution<double>(0.25);
+		testEventDistribution<double>(0.5);
+		testEventDistribution<double>(0.75);
+		testEventDistribution<double>(1.0);
 	}
 }

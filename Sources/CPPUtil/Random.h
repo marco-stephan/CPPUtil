@@ -175,5 +175,17 @@ namespace CPPUtil
 			// Cannot happen
 			return false;
 		}
+
+		/// <summary>
+		/// Returns whether an event randomly occurs
+		/// </summary>
+		/// <typeparam name="T">Type of the probability of the event</typeparam>
+		/// <param name="probability">Probability of the event to occur. Must be in range [0; 1]</param>
+		/// <returns>True if the event randomly occurred; False otherwise</returns>
+		template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+		bool EventOccurs(const T& probability)
+		{
+			return Rand<T>(static_cast<T>(0), static_cast<T>(1), false, true) < probability;
+		}
 	}
 }
