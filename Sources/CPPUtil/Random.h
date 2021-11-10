@@ -185,7 +185,7 @@ namespace CPPUtil
 		template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
 		bool EventOccurs(const T& probability)
 		{
-			return Rand<T>(static_cast<T>(0), static_cast<T>(1), false, true) < probability;
+			return Rand<T>(static_cast<T>(0), static_cast<T>(1), true, false) < probability;
 		}
 	}
 }
