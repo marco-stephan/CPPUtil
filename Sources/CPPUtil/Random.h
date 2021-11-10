@@ -27,17 +27,6 @@ namespace CPPUtil
 		void Init();
 
 		/// <summary>
-		/// Generates a random integer point value within the range [min, max] (min and max are minimum and maximum value of corresponding integer type).
-		/// </summary>
-		/// <typeparam name="T">Any integral type</typeparam>
-		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_integral_v<T> && !std::is_same_v<T, bool>, int> = 0>
-		T Rand()
-		{
-			return Rand<T>(std::numeric_limits<T>::min(), std::numeric_limits<T>::max(), true, true);
-		}
-
-		/// <summary>
 		/// Generates a random integer value within the provided range
 		/// </summary>
 		/// <typeparam name="T">Type of the random value to generate</typeparam>
@@ -68,11 +57,11 @@ namespace CPPUtil
 		}
 
 		/// <summary>
-		/// Generates a random boolean value.
+		/// Generates a random integer point value within the range [min, max] (min and max are minimum and maximum value of corresponding integer type).
 		/// </summary>
-		/// <typeparam name="T">bool</typeparam>
+		/// <typeparam name="T">Any integral type</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_same_v<T, bool>, int> = 0>
+		template<typename T, std::enable_if_t<std::is_integral_v<T> && !std::is_same_v<T, bool>, int> = 0>
 		T Rand()
 		{
 			return Rand<T>(std::numeric_limits<T>::min(), std::numeric_limits<T>::max(), true, true);
@@ -94,14 +83,14 @@ namespace CPPUtil
 		}
 
 		/// <summary>
-		/// Generates a random floating point value within the range [0, 1].
+		/// Generates a random boolean value.
 		/// </summary>
-		/// <typeparam name="T">Type of the random value to generate</typeparam>
+		/// <typeparam name="T">bool</typeparam>
 		/// <returns>The random value.</returns>
-		template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+		template<typename T, std::enable_if_t<std::is_same_v<T, bool>, int> = 0>
 		T Rand()
 		{
-			return Rand<T>(static_cast<T>(0.0), static_cast<T>(1.0), true, true);
+			return Rand<T>(std::numeric_limits<T>::min(), std::numeric_limits<T>::max(), true, true);
 		}
 
 		/// <summary>
@@ -122,6 +111,17 @@ namespace CPPUtil
 			std::uniform_real_distribution<T> randomDistribution(lowerBoundaryInclusive, upperBoundaryExclusive);
 
 			return randomDistribution(_randomEngine);
+		}
+
+		/// <summary>
+		/// Generates a random floating point value within the range [0, 1].
+		/// </summary>
+		/// <typeparam name="T">Type of the random value to generate</typeparam>
+		/// <returns>The random value.</returns>
+		template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+		T Rand()
+		{
+			return Rand<T>(static_cast<T>(0.0), static_cast<T>(1.0), true, true);
 		}
 
 		/// <summary>

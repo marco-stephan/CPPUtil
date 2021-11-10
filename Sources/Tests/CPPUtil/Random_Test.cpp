@@ -46,7 +46,7 @@ namespace CPPUtil_Test
 			// Generate random values and check if evenly distributed
 			while (true)
 			{
-				Type randomValue = CPPUtil::Random::Rand<Type>(min, max, true, false);
+				Type randomValue = (min == std::numeric_limits<Type>::min() && max == std::numeric_limits<Type>::max() ? CPPUtil::Random::Rand<Type>() : CPPUtil::Random::Rand<Type>(min, max, true, false));
 
 				// Place in correct interval
 				for (size_t i = 0; i < DISTRIBUTION_FLOATING_INTERVALS; i++)
@@ -90,7 +90,7 @@ namespace CPPUtil_Test
 			// Generate random values and check if evenly distributed
 			while (true)
 			{
-				Type randomValue = CPPUtil::Random::Rand<Type>(min, max, true, true);
+				Type randomValue = (min == std::numeric_limits<Type>::min() && max == std::numeric_limits<Type>::max() ? CPPUtil::Random::Rand<Type>() : CPPUtil::Random::Rand<Type>(min, max, true, true));
 
 				randomResults[randomValue - min]++;
 
