@@ -16,12 +16,24 @@ namespace CPPUtil_Test
 		constexpr static const double DISTRIBUTION_MAX_DEVIATION = 0.025;
 
 		// Amount of intervals to split [0; 1) into for the distribution check
-		constexpr static const size_t DISTRIBUTION_FLOATING_INTERVALS = 64;
+		constexpr static const size_t DISTRIBUTION_FLOATING_INTERVALS = 32;
+
+		// Amount of iterations to make sure that if min = max and both boundaries are inclusive, only min = max is returned
+		constexpr static const size_t MIN_MAX_ITERATIONS = 1000;
+
+		// Value of the min = max value
+		constexpr static const size_t MIN_MAX_VALUE = 11;
 
 	protected:
 
+		/// <summary>
+		/// Checks whether the CPPUtil::Random::Rand<Type>() function returns an even distribution
+		/// </summary>
+		/// <typeparam name="Type">Type of the values to randomize</typeparam>
+		/// <param name="min">Lower boundary of the values to generate (inclusive)</param>
+		/// <param name="max">Upper boundary of the values to generate (exclusive)</param>
 		template<typename Type, std::enable_if_t<std::is_floating_point_v<Type>, int> = 0>
-		void testEvenDistribution()
+		void testEvenDistribution(const Type min, const Type max)
 		{
 			std::vector<size_t> randomResults;
 
@@ -34,12 +46,12 @@ namespace CPPUtil_Test
 			// Generate random values and check if evenly distributed
 			for (size_t i = 0;; i++)
 			{
-				Type randomValue = CPPUtil::Random::Rand<Type>();
+				Type randomValue = CPPUtil::Random::Rand<Type>(min, max, true, false);
 
 				// Place in correct interval
 				for (size_t i = 0; i < DISTRIBUTION_FLOATING_INTERVALS; i++)
 				{
-					if (randomValue < static_cast<Type>(static_cast<double>(i + 1) * (1.0 / static_cast<double>(DISTRIBUTION_FLOATING_INTERVALS))))
+					if (randomValue < min + static_cast<Type>(static_cast<double>(i + 1) * (1.0 / static_cast<double>(DISTRIBUTION_FLOATING_INTERVALS))))
 					{
 						randomResults[i]++;
 						break;
@@ -53,17 +65,23 @@ namespace CPPUtil_Test
 			}
 		}
 
+		/// <summary>
+		/// Checks whether the CPPUtil::Random::Rand<Type>() function returns an even distribution
+		/// </summary>
+		/// <typeparam name="Type">Type of the values to randomize</typeparam>
+		/// <param name="min">Lower boundary of the values to generate (inclusive)</param>
+		/// <param name="max">Upper boundary of the values to generate (inclusive)</param>
 		template<typename Type, std::enable_if_t<!std::is_floating_point_v<Type>, int> = 0>
-		void testEvenDistribution()
+		void testEvenDistribution(const Type min, const Type max)
 		{
 			std::vector<size_t> randomResults;
 
 			// Prepare random result vector
-			for (size_t i = static_cast<size_t>(std::numeric_limits<Type>::min());; i++)
+			for (size_t i = static_cast<size_t>(min);; i++)
 			{
 				randomResults.push_back(0);
 
-				if (i == static_cast<size_t>(std::numeric_limits<Type>::max()))
+				if (i == static_cast<size_t>(max))
 				{
 					break;
 				}
@@ -72,9 +90,9 @@ namespace CPPUtil_Test
 			// Generate random values and check if evenly distributed
 			for (size_t i = 0;; i++)
 			{
-				Type randomValue = CPPUtil::Random::Rand<Type>();
+				Type randomValue = CPPUtil::Random::Rand<Type>(min, max, true, true);
 
-				randomResults[randomValue - std::numeric_limits<Type>::min()]++;
+				randomResults[randomValue - min]++;
 
 				if (randomResultsEvenlyDistributed(randomResults))
 				{
@@ -83,6 +101,11 @@ namespace CPPUtil_Test
 			}
 		}
 
+		/// <summary>
+		/// Checks whether the provided random value vector is semi-evenly distributed
+		/// </summary>
+		/// <param name="randomResults">Random value vector. Contains the number of times each "element" has been hit</param>
+		/// <returns>True if semi-evenly distributed; False otherwise</returns>
 		bool randomResultsEvenlyDistributed(std::vector<size_t>& randomResults)
 		{
 			// Vector must contain at least DISTRIBUTION_MIN_ELEMENTS random results
@@ -113,6 +136,35 @@ namespace CPPUtil_Test
 			return true;
 		}
 
+		/// <summary>
+		/// Tests whether if min = max and both boundaries are inclusive, only the min = max value is returned at all times
+		/// </summary>
+		/// <typeparam name="Type">Type of the values to randomize</typeparam>
+		template<typename Type>
+		void testMinEqualsMax()
+		{
+			for (size_t i = 0; i < MIN_MAX_ITERATIONS; i++)
+			{
+				const Type randomValue = CPPUtil::Random::Rand<Type>(static_cast<Type>(MIN_MAX_VALUE), static_cast<Type>(MIN_MAX_VALUE), true, true);
+
+				if constexpr (std::is_floating_point_v<Type>)
+				{
+					if constexpr (std::is_same_v<Type, float>)
+					{
+						ASSERT_FLOAT_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
+					}
+					else
+					{
+						ASSERT_DOUBLE_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
+					}
+				}
+				else
+				{
+					ASSERT_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
+				}
+			}
+		}
+
 	public:
 
 		virtual void SetUp() override
@@ -128,26 +180,42 @@ namespace CPPUtil_Test
 
 	TEST_F(Random_Test, Bool)
 	{
-		testEvenDistribution<bool>();
+		testEvenDistribution<bool>(std::numeric_limits<bool>::min(), std::numeric_limits<bool>::max());
+		testEvenDistribution<bool>(false, false);
+		testEvenDistribution<bool>(true, true);
+
+		testMinEqualsMax<bool>();
 	}
 
 	TEST_F(Random_Test, UnsignedChar)
 	{
-		testEvenDistribution<unsigned char>();
+		testEvenDistribution<unsigned char>(std::numeric_limits<unsigned char>::min(), std::numeric_limits<unsigned char>::max());
+		testEvenDistribution<unsigned char>(17, 104);
+
+		testMinEqualsMax<unsigned char>();
 	}
 
 	TEST_F(Random_Test, Char)
 	{
-		testEvenDistribution<char>();
+		testEvenDistribution<char>(std::numeric_limits<char>::min(), std::numeric_limits<char>::max());
+		testEvenDistribution<char>(17, 104);
+
+		testMinEqualsMax<char>();
 	}
 
 	TEST_F(Random_Test, Float)
 	{
-		testEvenDistribution<float>();
+		testEvenDistribution<float>(0.0f, 1.0f);
+		testEvenDistribution<float>(-8.0f, 20.0f);
+
+		testMinEqualsMax<float>();
 	}
 
 	TEST_F(Random_Test, Double)
 	{
-		testEvenDistribution<double>();
+		testEvenDistribution<double>(0.0, 1.0);
+		testEvenDistribution<double>(-8.0, 20.0);
+
+		testMinEqualsMax<double>();
 	}
 }
