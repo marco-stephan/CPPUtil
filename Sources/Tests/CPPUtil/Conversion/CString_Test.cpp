@@ -83,7 +83,7 @@ namespace CPPUtil_Test
 				const float& floatValue = std::get<0>(FLOAT_STRING_PAIRS[i]);
 				const char* stringValue = std::get<1>(FLOAT_STRING_PAIRS[i]);
 
-				ASSERT_FLOAT_EQ(CPPUtil::Conversion::CString::ToFloat(stringValue), floatValue) << "Index: " << i;
+				ASSERT_FLOAT_EQ(CPPUtil::Conversion::CString::ToFloatingPoint<float>(stringValue), floatValue) << "Index: " << i;
 			}
 		}
 
@@ -94,7 +94,7 @@ namespace CPPUtil_Test
 				const double& doubleValue = std::get<0>(DOUBLE_STRING_PAIRS[i]);
 				const char* stringValue = std::get<1>(DOUBLE_STRING_PAIRS[i]);
 
-				ASSERT_DOUBLE_EQ(CPPUtil::Conversion::CString::ToDouble(stringValue), doubleValue) << "Index: " << i;
+				ASSERT_DOUBLE_EQ(CPPUtil::Conversion::CString::ToFloatingPoint<double>(stringValue), doubleValue) << "Index: " << i;
 			}
 		}
 

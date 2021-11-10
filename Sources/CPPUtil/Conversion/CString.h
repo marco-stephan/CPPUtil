@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <string>
 #include <type_traits>
 #include "CPPUtil/Conversion/Boolean.h"
 
@@ -56,18 +57,23 @@ namespace CPPUtil
 			}
 
 			/// <summary>
-			/// Converts a C string to a float.
+			/// Converts a C string to a floating point number.
 			/// </summary>
-			/// <param name="str">The C string to convert. This C string must represent a valid float.</param>
-			/// <returns>The converted float.</returns>
-			float ToFloat(const char* str);
-
-			/// <summary>
-			/// Converts a C string to a double.
-			/// </summary>
-			/// <param name="str">The C string to convert. This C string must represent a valid float.</param>
-			/// <returns>The converted double.</returns>
-			double ToDouble(const char* str);
+			/// <typeparam name="T">Type of the floating point number</typeparam>
+			/// <param name="str">The C string to convert. This C string must represent a valid floating point number.</param>
+			/// <returns>The converted floating point number.</returns>
+			template<typename T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+			T ToFloatingPoint(const char* str)
+			{
+				if constexpr (std::is_same_v<T, float>)
+				{
+					return std::stof(str);
+				}
+				else
+				{
+					return std::stod(str);
+				}
+			}
 
 			/// <summary>
 			/// Converts a C string to a wide character C string.

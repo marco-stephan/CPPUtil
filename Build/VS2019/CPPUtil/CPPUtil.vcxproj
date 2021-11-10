@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\Boolean.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\CString.cpp" />
-    <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\String.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\CString.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\IStream.cpp" />
     <ClCompile Include="..\..\..\Sources\CPPUtil\Random.cpp" />

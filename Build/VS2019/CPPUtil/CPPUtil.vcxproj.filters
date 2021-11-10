@@ -45,9 +45,6 @@
     <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\CString.cpp">
       <Filter>Source Files\CPPUtil\Conversion</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Sources\CPPUtil\Conversion\String.cpp">
-      <Filter>Source Files\CPPUtil\Conversion</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Sources\CPPUtil\String.cpp">
       <Filter>Source Files\CPPUtil</Filter>
     </ClCompile>

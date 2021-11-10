@@ -1,23 +1,12 @@
 #include "CString.h"
 
 #include <stdlib.h>
-#include <string>
 #include "CPPUtil/CString.h"
 
 #if defined(_WIN32)
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #endif // defined(_WIN32)
-
-float CPPUtil::Conversion::CString::ToFloat(const char* str)
-{
-	return std::stof(str);
-}
-
-double CPPUtil::Conversion::CString::ToDouble(const char* str)
-{
-	return std::stod(str);
-}
 
 wchar_t* CPPUtil::Conversion::CString::ToWideCString(const char* str)
 {
