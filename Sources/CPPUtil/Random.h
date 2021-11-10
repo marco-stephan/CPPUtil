@@ -13,7 +13,7 @@ namespace CPPUtil
 	/// </summary>
 	namespace Random
 	{
-		extern std::default_random_engine randomEngine;
+		extern std::default_random_engine _randomEngine;
 
 		/// <summary>
 		/// Initializes the randomization utilities.
@@ -63,7 +63,7 @@ namespace CPPUtil
 
 				std::uniform_int_distribution<T> randomDistribution(lowerBoundaryInclusive, upperBoundaryInclusive);
 
-				return randomDistribution(randomEngine);
+				return randomDistribution(_randomEngine);
 			}
 		}
 
@@ -121,7 +121,59 @@ namespace CPPUtil
 
 			std::uniform_real_distribution<T> randomDistribution(lowerBoundaryInclusive, upperBoundaryExclusive);
 
-			return randomDistribution(randomEngine);
+			return randomDistribution(_randomEngine);
+		}
+
+		/// <summary>
+		/// Determines a random interval given several intervals. The propability of each interval is equal to its value (i.e. cardinality) in relation to the total interval sum.
+		/// The cardinalities must not be negative
+		/// </summary>
+		/// <typeparam name="T">Type of the elements of the interval vector</typeparam>
+		/// <param name="intervals">Intervals. Each interval is defined by its cardinality</param>
+		/// <param name="randomIntervalIndex">Index of the random interval. Only valid if true is returned. May be NULL</param>
+		/// <returns>True if a random interval could be determined; False if no intervals provided or if none of the intervals have a cardinality &gt; 0</returns>
+		template<typename T>
+		bool RandInterval(const std::vector<T>& intervals, size_t* randomIntervalIndex)
+		{
+			// Determine sum of cardinality
+			double cardinalitySum = 0.0;
+
+			for (auto interval : intervals)
+			{
+				cardinalitySum += static_cast<double>(interval);
+			}
+
+			// Check if any non-empty intervals were provided
+			if (!cardinalitySum)
+			{
+				return false;
+			}
+
+			// Generate random number
+			double randomValue = Rand<double>(0.0, cardinalitySum, true, false);
+
+			// Determine in which interval the random value lies (all intervals are placed after each other)
+			for (size_t i = 0; i < intervals.size(); i++)
+			{
+				double interval = static_cast<double>(intervals[i]);
+
+				if (randomValue < interval)
+				{
+					// Random interval determined
+					if (randomIntervalIndex)
+					{
+						*randomIntervalIndex = i;
+					}
+
+					return true;
+				}
+
+				// Discard the current interval to "move to the next interval"
+				randomValue -= interval;
+			}
+
+			// Cannot happen
+			return false;
 		}
 	}
 }
