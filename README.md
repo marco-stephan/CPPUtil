@@ -16,7 +16,7 @@ The repository contains a Visual Studio 2019 solution (located at Build/VS2019/C
 To build the library, simply build the CPPUtil project. All library files are then placed in a root level directory "Install". While the source code should also be compilable on Linux as well, no build setup is provided for that as of now.
 
 ## Examples
-Examples can be found under [Examples/](https://github.com/marco-stephan/CPPUtil/tree/master/Sources/CPPUtil).
+Examples can be found under [Examples/](https://github.com/marco-stephan/CPPUtil/tree/master/Sources/Examples).
 
 ## License
 Licensed under the [MIT License](LICENSE).
