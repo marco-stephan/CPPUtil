@@ -106,9 +106,21 @@ namespace CPPUtil
 		T Rand(const T min, const T max, const bool minInclusive, const bool maxInclusive)
 		{
 			const T lowerBoundaryInclusive = (minInclusive ? min : std::nextafter(min, std::numeric_limits<T>::max()));
-			const T upperBoundaryExclusive = (maxInclusive ? max : std::nextafter(max, std::numeric_limits<T>::min()));
+			const T upperBoundaryExclusive = (maxInclusive ? std::nextafter(max, std::numeric_limits<T>::max()) : max);
 
 			std::uniform_real_distribution<T> randomDistribution(lowerBoundaryInclusive, upperBoundaryExclusive);
+
+			// According to https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution#Notes, there are many implementations
+			// in which the bug is present that uniform_real_distribution<T>(a, b) actually returns a floating value in [a; b] instead of
+			// [a; b). This can be easily checked by checking if the maximum generated floating point value is equal to the b. If so, use
+			// the largest floating point smaller than b as the new (now inclusive) upper boundary.
+			if (randomDistribution.max() == upperBoundaryExclusive)
+			{
+				// Current implementation is bugged and uses [a; b] --> override distribution
+				const T upperBoundaryInclusive = (maxInclusive ? max : std::nextafter(max, std::numeric_limits<T>::min()));
+
+				randomDistribution = std::uniform_real_distribution<T>(lowerBoundaryInclusive, upperBoundaryInclusive);
+			}
 
 			return randomDistribution(_randomEngine);
 		}
