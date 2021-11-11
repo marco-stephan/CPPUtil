@@ -132,7 +132,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "..\..\..\Sources\CPPUtil\*h" "E:\Marco\Dokumente\Programmierungen\C++\CPPUtil\Build\VS2019\..\..\Install\CPPUtil\bin\x64\Debug\..\..\..\include\CPPUtil\" /E /H</Command>
+      <Command>xcopy /Y "$(SolutionDir)\..\..\Sources\CPPUtil\*h" "$(SolutionDir)\..\..\Install\CPPUtil\include\CPPUtil\" /E /H</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -160,7 +160,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "..\..\..\Sources\CPPUtil\*h" "E:\Marco\Dokumente\Programmierungen\C++\CPPUtil\Build\VS2019\..\..\Install\CPPUtil\bin\x64\Debug\..\..\..\include\CPPUtil\" /E /H</Command>
+      <Command>xcopy /Y "$(SolutionDir)\..\..\Sources\CPPUtil\*h" "$(SolutionDir)\..\..\Install\CPPUtil\include\CPPUtil\" /E /H</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -184,7 +184,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "..\..\..\Sources\CPPUtil\*h" "E:\Marco\Dokumente\Programmierungen\C++\CPPUtil\Build\VS2019\..\..\Install\CPPUtil\bin\x64\Debug\..\..\..\include\CPPUtil\" /E /H</Command>
+      <Command>xcopy /Y "$(SolutionDir)\..\..\Sources\CPPUtil\*h" "$(SolutionDir)\..\..\Install\CPPUtil\include\CPPUtil\" /E /H</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -212,7 +212,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /Y "..\..\..\Sources\CPPUtil\*h" "E:\Marco\Dokumente\Programmierungen\C++\CPPUtil\Build\VS2019\..\..\Install\CPPUtil\bin\x64\Debug\..\..\..\include\CPPUtil\" /E /H</Command>
+      <Command>xcopy /Y "$(SolutionDir)\..\..\Sources\CPPUtil\*h" "$(SolutionDir)\..\..\Install\CPPUtil\include\CPPUtil\" /E /H</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
