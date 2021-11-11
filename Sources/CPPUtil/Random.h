@@ -161,31 +161,31 @@ namespace CPPUtil
 				return false;
 			}
 
-			// Generate random number
-			double randomValue = Rand<double>(0.0, cardinalitySum, true, false);
-
-			// Determine in which interval the random value lies (all intervals are placed after each other)
-			for (size_t i = 0; i < intervals.size(); i++)
+			// Check if index shall be determined
+			if (randomIntervalIndex)
 			{
-				double interval = static_cast<double>(intervals[i]);
+				// Generate random number
+				double randomValue = Rand<double>(0.0, cardinalitySum, true, false);
 
-				if (randomValue < interval)
+				// Determine in which interval the random value lies (all intervals are placed after each other)
+				for (size_t i = 0; i < intervals.size(); i++)
 				{
-					// Random interval determined
-					if (randomIntervalIndex)
+					double interval = static_cast<double>(intervals[i]);
+
+					if (randomValue < interval)
 					{
+						// Random interval determined
 						*randomIntervalIndex = i;
+						break;
 					}
 
-					return true;
+					// Discard the current interval to "move to the next interval"
+					randomValue -= interval;
 				}
-
-				// Discard the current interval to "move to the next interval"
-				randomValue -= interval;
 			}
 
-			// Cannot happen
-			return false;
+			// Random interval could be determined
+			return true;
 		}
 
 		/// <summary>
