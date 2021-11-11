@@ -60,7 +60,7 @@
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Math\Basics_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Math\Trigonometry_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Random_Test.cpp" />
-    <ClCompile Include="..\..\..\Sources\Tests\String_Test.cpp" />
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\String_Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CPPUtil\CPPUtil.vcxproj">
