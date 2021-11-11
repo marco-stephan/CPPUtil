@@ -242,7 +242,10 @@ namespace CPPUtil_Test
 				if (interval == 0)
 				{
 					// If zero-width interval -> There must not be any hits
-					[&](){ASSERT_EQ(randomResult, 0);}();
+					[&]()
+					{
+						ASSERT_EQ(randomResult, 0);
+					}();
 				}
 				else
 				{
@@ -270,21 +273,7 @@ namespace CPPUtil_Test
 			{
 				const Type randomValue = CPPUtil::Random::Rand<Type>(static_cast<Type>(MIN_MAX_VALUE), static_cast<Type>(MIN_MAX_VALUE), true, true);
 
-				if constexpr (std::is_floating_point_v<Type>)
-				{
-					if constexpr (std::is_same_v<Type, float>)
-					{
-						ASSERT_FLOAT_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
-					}
-					else
-					{
-						ASSERT_DOUBLE_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
-					}
-				}
-				else
-				{
-					ASSERT_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
-				}
+				ASSERT_EQ(randomValue, static_cast<Type>(MIN_MAX_VALUE));
 			}
 		}
 

@@ -106,7 +106,7 @@ namespace CPPUtil
 		T Rand(const T min, const T max, const bool minInclusive, const bool maxInclusive)
 		{
 			const T lowerBoundaryInclusive = (minInclusive ? min : std::nextafter(min, std::numeric_limits<T>::max()));
-			const T upperBoundaryExclusive = (maxInclusive ? std::nextafter(max, std::numeric_limits<T>::max()) : max);
+			const T upperBoundaryExclusive = (maxInclusive ? max : std::nextafter(max, std::numeric_limits<T>::min()));
 
 			std::uniform_real_distribution<T> randomDistribution(lowerBoundaryInclusive, upperBoundaryExclusive);
 
