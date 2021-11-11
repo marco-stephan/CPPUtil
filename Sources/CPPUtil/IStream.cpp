@@ -1,7 +1,5 @@
 #include "IStream.h"
 
-#include <string>
-
 std::istream& CPPUtil::IStream::GetLine(std::istream& inputStream, std::string& line, bool platformIndependentLineEndings)
 {
 	if (!platformIndependentLineEndings)

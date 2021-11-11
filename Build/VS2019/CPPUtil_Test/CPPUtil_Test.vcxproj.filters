@@ -54,5 +54,8 @@
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\String_Test.cpp">
       <Filter>Source Files\Tests\CPPUtil</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\IStream_Test.cpp">
+      <Filter>Source Files\Tests\CPPUtil</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

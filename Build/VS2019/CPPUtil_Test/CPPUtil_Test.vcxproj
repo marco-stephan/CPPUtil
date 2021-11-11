@@ -57,6 +57,7 @@
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Conversion\Integer_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Conversion\String_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\CString_Test.cpp" />
+    <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\IStream_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Math\Basics_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Math\Trigonometry_Test.cpp" />
     <ClCompile Include="..\..\..\Sources\Tests\CPPUtil\Random_Test.cpp" />
