@@ -153,9 +153,13 @@ namespace CPPUtil_Test
 	TEST_F(String_Test, IsIntegerInt)
 	{
 		ASSERT_TRUE(CPPUtil::String::IsInteger<int>("132453"));
+		ASSERT_TRUE(CPPUtil::String::IsInteger<int>("+132453"));
 		ASSERT_TRUE(CPPUtil::String::IsInteger<int>("-132453"));
 		ASSERT_TRUE(CPPUtil::String::IsInteger<int>("-0"));
+		ASSERT_TRUE(CPPUtil::String::IsInteger<int>(std::to_string(std::numeric_limits<int>::max())));
+		ASSERT_TRUE(CPPUtil::String::IsInteger<int>(std::string("0") + std::to_string(std::numeric_limits<int>::max())));
 
+		ASSERT_FALSE(CPPUtil::String::IsInteger<int>(""));
 		ASSERT_FALSE(CPPUtil::String::IsInteger<int>("3.1415"));
 		ASSERT_FALSE(CPPUtil::String::IsInteger<int>("3."));
 		ASSERT_FALSE(CPPUtil::String::IsInteger<int>("+-3"));
@@ -171,7 +175,11 @@ namespace CPPUtil_Test
 		ASSERT_TRUE(CPPUtil::String::IsInteger<unsigned int>("132453"));
 		ASSERT_TRUE(CPPUtil::String::IsInteger<unsigned int>("+132453"));
 		ASSERT_TRUE(CPPUtil::String::IsInteger<unsigned int>("0"));
+		ASSERT_TRUE(CPPUtil::String::IsInteger<unsigned int>(std::to_string(std::numeric_limits<unsigned int>::max())));
+		ASSERT_TRUE(CPPUtil::String::IsInteger<unsigned int>(std::string("0") + std::to_string(std::numeric_limits<unsigned int>::max())));
 
+		ASSERT_FALSE(CPPUtil::String::IsInteger<unsigned int>(""));
+		ASSERT_FALSE(CPPUtil::String::IsInteger<unsigned int>("-132453"));
 		ASSERT_FALSE(CPPUtil::String::IsInteger<unsigned int>("3.1415"));
 		ASSERT_FALSE(CPPUtil::String::IsInteger<unsigned int>("3."));
 		ASSERT_FALSE(CPPUtil::String::IsInteger<unsigned int>("-3"));

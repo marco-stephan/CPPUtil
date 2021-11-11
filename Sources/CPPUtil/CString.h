@@ -103,14 +103,6 @@ namespace CPPUtil
 		template<typename Type>
 		bool IsInteger(const char* str)
 		{
-			size_t strLength = Strlen(str);
-
-			// Check for an empty string
-			if (strLength == 0)
-			{
-				return false;
-			}
-
 			bool hasSign = false;
 			bool positive = true;
 
@@ -126,7 +118,7 @@ namespace CPPUtil
 
 				if constexpr (std::is_unsigned_v<Type>)
 				{
-					if (positive == false)
+					if (!positive)
 					{
 						// Negative sign but unsigned type
 						return false;
@@ -134,17 +126,35 @@ namespace CPPUtil
 				}
 			}
 
+			// Remove sign from str
+			const char* unsignedStr = (!hasSign ? str : &str[1]);
+			bool removedLeadingZeroes = false;
+
+			// Remove all leading zeroes
+			while (unsignedStr[0] == '0')
+			{
+				unsignedStr++;
+				removedLeadingZeroes = true;
+			}
+
+			// Check if string is empty
+			size_t unsignedStrLength = Strlen(unsignedStr);
+
+			if (!unsignedStrLength)
+			{
+				// If leading zeroes were removed, it consisted only of zeroes (valid number)
+				// Otherwise it was already empty before
+
+				return removedLeadingZeroes;
+			}
+
 			// Determine boundary to use
 			const char* boundaryString = Conversion::Integer::ToCString(positive ? std::numeric_limits<Type>::max() : std::numeric_limits<Type>::min());
 			const char* unsignedBoundaryString = (boundaryString[0] != '-' ? boundaryString : &boundaryString[1]);
 			size_t unsignedBoundaryStringLength = Strlen(unsignedBoundaryString);
 
-			// Remove sign from str
-			const char* unsignedStr = (!hasSign ? str : &str[1]);
-			size_t unsignedStrLength = (!hasSign ? strLength : strLength - 1);
-
 			// Check if boundary exceeded for sure
-			bool isInteger = unsignedStrLength > 0 && (unsignedStrLength <= unsignedBoundaryStringLength);
+			bool isInteger = (unsignedStrLength <= unsignedBoundaryStringLength);
 
 			if (isInteger)
 			{
@@ -169,15 +179,15 @@ namespace CPPUtil
 					{
 						const char& unsignedBoundaryStringChar = unsignedBoundaryString[i];
 
-						// String > boundary
+						// String > boundary?
 						if (unsignedBoundaryStringChar < unsignedStrChar)
 						{
-							// No integer
+							// Boundary exceeded
 							isInteger = false;
 							break;
 						}
 
-						// Boundary > String
+						// Boundary > string?
 						if (unsignedBoundaryStringChar > unsignedStrChar)
 						{
 							boundaryPotentiallyExceeded = false;
