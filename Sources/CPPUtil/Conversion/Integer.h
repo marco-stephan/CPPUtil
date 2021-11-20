@@ -55,7 +55,7 @@ namespace CPPUtil
 					}
 					else
 					{
-						Type lastDigit = integerCopy % 10;
+						char lastDigit = static_cast<char>(integerCopy % 10);
 
 						if constexpr (std::is_signed_v<Type>)
 						{
