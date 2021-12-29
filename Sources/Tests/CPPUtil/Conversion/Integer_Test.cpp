@@ -25,6 +25,12 @@ namespace CPPUtil_Test
 				{"0", 0}
 			};
 
+			const std::vector<std::tuple<const char*, int8_t>> STRING_INT8_PAIRS = {
+				{"127", 127},
+				{"-128", -128},
+				{"0", 0}
+			};
+
 		public:
 
 			virtual void SetUp() override
@@ -68,6 +74,21 @@ namespace CPPUtil_Test
 				const unsigned int unsignedIntValue = std::get<1>(STRING_UNSIGNED_INT_PAIRS[i]);
 
 				const char* string = CPPUtil::Conversion::Integer::ToCString(unsignedIntValue);
+
+				ASSERT_STREQ(string, stringValue) << "Index: " << i;
+
+				delete[] string;
+			}
+		}
+
+		TEST_F(Conversion_Integer_Test, ToCStringInt8)
+		{
+			for (size_t i = 0; i < STRING_INT8_PAIRS.size(); i++)
+			{
+				const char* stringValue = std::get<0>(STRING_INT8_PAIRS[i]);
+				const int8_t int8Value = std::get<1>(STRING_INT8_PAIRS[i]);
+
+				const char* string = CPPUtil::Conversion::Integer::ToCString(int8Value);
 
 				ASSERT_STREQ(string, stringValue) << "Index: " << i;
 

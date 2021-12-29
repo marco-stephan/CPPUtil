@@ -38,7 +38,7 @@ namespace CPPUtil
 				size_t stringLength = (integer < 0 ? 1 : 0) + Math::Basics::NumberOfDigits(integer);
 				char* string = new char[stringLength + 1];
 
-				Type integerCopy = Math::Basics::Abs(integer);
+				Type integerCopy = integer;
 				size_t stringIndex = stringLength;
 
 				string[stringIndex] = '\0';
