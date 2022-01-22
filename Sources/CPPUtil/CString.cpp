@@ -225,7 +225,7 @@ char* CPPUtil::CString::ReadFile(const char* filePath)
 char* CPPUtil::CString::TimeStamp(const char* timeStampFormat)
 {
 	// Get local time
-	std::tm localTime{};
+	std::tm localTime {};
 	std::time_t time = std::time(0);
 
 #ifdef _WIN32

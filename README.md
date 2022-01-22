@@ -7,7 +7,7 @@ Examples for such provided utilities are:
 - Conversion between primitive datatypes
 
 ## Building
-The repository contains a Visual Studio 2019 solution (located at Build/VS2019/CPPUtil.sln). There, 2 projects are provided:
+The repository contains a Visual Studio 2022 solution (located at Build/VS/CPPUtil.sln). There, 2 projects are provided:
 | Project      | Purpose                                                |
 | ------------ | ------------------------------------------------------ |
 | CPPUtil      | CPPUtil itself configured to build as a static library |
